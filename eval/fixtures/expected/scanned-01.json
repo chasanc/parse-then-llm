@@ -1,0 +1,33 @@
+{
+  "documentId": "scanned-01",
+  "extractionTier": 2,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "llm",
+    "invoiceNumber": "llm",
+    "issueDate": "llm",
+    "currency": "llm",
+    "lineItems": "llm",
+    "total": "llm"
+  },
+  "status": "ai_enhanced",
+  "vendor": "Meridian Print Works",
+  "invoiceNumber": "MP-3301",
+  "issueDate": "2026-07-07",
+  "currency": "USD",
+  "lineItems": [
+    {
+      "description": "Business cards",
+      "quantity": 500,
+      "unitPrice": 12,
+      "amount": 6000
+    },
+    {
+      "description": "Flyers",
+      "quantity": 200,
+      "unitPrice": 45,
+      "amount": 9000
+    }
+  ],
+  "total": 15000
+}

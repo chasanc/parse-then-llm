@@ -1,0 +1,13 @@
+{
+  "documentId": "corrupt-01",
+  "extractionTier": 1,
+  "coverageScore": 0,
+  "fieldSources": {},
+  "status": "failed",
+  "vendor": null,
+  "invoiceNumber": null,
+  "issueDate": null,
+  "currency": null,
+  "lineItems": [],
+  "total": null
+}

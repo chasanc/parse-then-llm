@@ -1,0 +1,33 @@
+{
+  "documentId": "mismatch-01",
+  "extractionTier": 2,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "needs_review",
+  "vendor": "Delta Freight Inc",
+  "invoiceNumber": "DF-1001",
+  "issueDate": "2026-09-01",
+  "currency": "USD",
+  "lineItems": [
+    {
+      "description": "Freight",
+      "quantity": 1,
+      "unitPrice": 50000,
+      "amount": 50000
+    },
+    {
+      "description": "Fee",
+      "quantity": 1,
+      "unitPrice": 2500,
+      "amount": 2500
+    }
+  ],
+  "total": 55000
+}

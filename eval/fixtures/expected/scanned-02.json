@@ -1,0 +1,33 @@
+{
+  "documentId": "scanned-02",
+  "extractionTier": 2,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "llm",
+    "invoiceNumber": "llm",
+    "issueDate": "llm",
+    "currency": "llm",
+    "lineItems": "llm",
+    "total": "llm"
+  },
+  "status": "ai_enhanced",
+  "vendor": "Olivetti Cafe Supplies",
+  "invoiceNumber": "OC-2208",
+  "issueDate": "2026-08-19",
+  "currency": "EUR",
+  "lineItems": [
+    {
+      "description": "Espresso beans 1kg",
+      "quantity": 6,
+      "unitPrice": 2150,
+      "amount": 12900
+    },
+    {
+      "description": "Filters",
+      "quantity": 10,
+      "unitPrice": 390,
+      "amount": 3900
+    }
+  ],
+  "total": 16800
+}

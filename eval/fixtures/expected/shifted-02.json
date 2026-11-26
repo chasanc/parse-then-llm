@@ -1,0 +1,33 @@
+{
+  "documentId": "shifted-02",
+  "extractionTier": 1,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "verified",
+  "vendor": "Lumen Stationers",
+  "invoiceNumber": "LS/2026/118",
+  "issueDate": "2026-05-02",
+  "currency": "GBP",
+  "lineItems": [
+    {
+      "description": "Notebooks",
+      "quantity": 20,
+      "unitPrice": 350,
+      "amount": 7000
+    },
+    {
+      "description": "Ink set",
+      "quantity": 6,
+      "unitPrice": 1299,
+      "amount": 7794
+    }
+  ],
+  "total": 14794
+}

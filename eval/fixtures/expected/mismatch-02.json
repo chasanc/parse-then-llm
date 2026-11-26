@@ -1,0 +1,33 @@
+{
+  "documentId": "mismatch-02",
+  "extractionTier": 2,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "needs_review",
+  "vendor": "Evergreen Tools",
+  "invoiceNumber": "EG-640",
+  "issueDate": "2026-10-12",
+  "currency": "GBP",
+  "lineItems": [
+    {
+      "description": "Drill",
+      "quantity": 2,
+      "unitPrice": 8900,
+      "amount": 17800
+    },
+    {
+      "description": "Bits",
+      "quantity": 4,
+      "unitPrice": 1250,
+      "amount": 5000
+    }
+  ],
+  "total": 21000
+}

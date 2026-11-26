@@ -1,0 +1,33 @@
+{
+  "documentId": "shifted-03",
+  "extractionTier": 2,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "llm",
+    "invoiceNumber": "llm",
+    "issueDate": "llm",
+    "currency": "llm",
+    "lineItems": "llm",
+    "total": "llm"
+  },
+  "status": "ai_enhanced",
+  "vendor": "Quarry Lane Bakery",
+  "invoiceNumber": "QLB-9",
+  "issueDate": "2026-06-14",
+  "currency": "EUR",
+  "lineItems": [
+    {
+      "description": "Sourdough loaf",
+      "quantity": 40,
+      "unitPrice": 450,
+      "amount": 18000
+    },
+    {
+      "description": "Croissant box",
+      "quantity": 8,
+      "unitPrice": 1800,
+      "amount": 14400
+    }
+  ],
+  "total": 32400
+}

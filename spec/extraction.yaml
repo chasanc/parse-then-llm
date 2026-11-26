@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: parse-then-llm extraction contract
+  version: 0.1.0
+  description: >
+    Canonical extraction payload shared by the API and both extractor tiers.
+    Money is an integer in minor units (cents), never a float, so the
+    arithmetic cross-check (sum of line items == total) is exact.
+paths:
+  /internal/extractions/tier1:
+    post:
+      summary: Deterministic parser result
+      parameters: [{ $ref: '#/components/parameters/Signature' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Extraction' }
+      responses:
+        '204': { description: Accepted }
+        '401': { description: Missing or invalid signature }
+  /internal/extractions/tier2:
+    post:
+      summary: LLM fallback result
+      parameters: [{ $ref: '#/components/parameters/Signature' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Extraction' }
+      responses:
+        '204': { description: Accepted }
+        '401': { description: Missing or invalid signature }
+components:
+  parameters:
+    Signature:
+      name: X-Signature
+      in: header
+      required: true
+      description: Hex HMAC-SHA256 of the raw request body.
+      schema: { type: string }
+  schemas:
+    Source:
+      type: string
+      enum: [structured, pdf, llm]
+      description: Where a field value came from. Precedence is structured, then pdf, then llm.
+    Status:
+      type: string
+      enum: [verified, ai_enhanced, needs_review, failed]
+      description: >
+        verified: tier 1 resolved it and the invariants hold.
+        ai_enhanced: tier 2 supplied the result and the invariants hold.
+        needs_review: invariants still fail after the last tier that ran.
+        failed: nothing could be read.
+    LineItem:
+      type: object
+      additionalProperties: false
+      required: [description, quantity, unitPrice, amount]
+      properties:
+        description: { type: string, minLength: 1 }
+        quantity: { type: integer, minimum: 1 }
+        unitPrice: { type: integer, minimum: 0, description: Minor units }
+        amount: { type: integer, minimum: 0, description: Minor units, equals quantity * unitPrice }
+    Extraction:
+      type: object
+      additionalProperties: false
+      required:
+        [documentId, extractionTier, coverageScore, fieldSources, status,
+         vendor, invoiceNumber, issueDate, currency, lineItems, total]
+      properties:
+        documentId: { type: string, minLength: 1 }
+        extractionTier:
+          type: integer
+          enum: [1, 2]
+          description: Highest tier that ran for this result.
+        coverageScore:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Fraction of the six invoice fields that are present.
+        fieldSources:
+          type: object
+          additionalProperties: false
+          description: Provenance per field. A missing field has no entry.
+          properties:
+            vendor: { $ref: '#/components/schemas/Source' }
+            invoiceNumber: { $ref: '#/components/schemas/Source' }
+            issueDate: { $ref: '#/components/schemas/Source' }
+            currency: { $ref: '#/components/schemas/Source' }
+            lineItems: { $ref: '#/components/schemas/Source' }
+            total: { $ref: '#/components/schemas/Source' }
+        status: { $ref: '#/components/schemas/Status' }
+        vendor: { type: [string, 'null'] }
+        invoiceNumber: { type: [string, 'null'] }
+        issueDate: { type: [string, 'null'], format: date }
+        currency: { type: [string, 'null'], pattern: '^[A-Z]{3}$' }
+        lineItems:
+          type: array
+          items: { $ref: '#/components/schemas/LineItem' }
+          description: Empty array when absent.
+        total: { type: [integer, 'null'], minimum: 0, description: Minor units }
+        usage:
+          type: object
+          additionalProperties: false
+          required: [inputTokens, outputTokens]
+          description: Tokens the model call used. Sent by Tier 2 only when a real model answered; kept in extraction_runs, not in the merged result.
+          properties:
+            inputTokens: { type: integer, minimum: 0 }
+            outputTokens: { type: integer, minimum: 0 }

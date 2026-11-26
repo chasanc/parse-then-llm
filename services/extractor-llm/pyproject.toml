@@ -1,0 +1,17 @@
+[project]
+name = "extractor-llm"
+version = "0.1.0"
+description = "Tier 2: LLM invoice extractor (page images + text layer in, contract payload out)"
+requires-python = ">=3.11"
+dependencies = ["anthropic", "pymupdf", "requests"]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
+exclude-newer = "7 days"

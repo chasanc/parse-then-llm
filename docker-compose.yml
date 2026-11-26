@@ -1,0 +1,68 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?copy .env.example to .env}
+      POSTGRES_DB: parse_then_llm
+    ports:
+      - "127.0.0.1:5440:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  api:
+    build: { context: ., dockerfile: apps/api/Dockerfile }
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/parse_then_llm
+      HMAC_SECRET: ${HMAC_SECRET:?generate one, see .env.example}
+      PTL_API_KEY: ${PTL_API_KEY:?generate one, see .env.example}
+      MAX_DOCUMENT_BYTES: ${MAX_DOCUMENT_BYTES:-20971520}
+      DOCUMENTS_DIR: /data/documents
+      EXTRACTOR_TIER1_URL: http://extractor-deterministic:8000/run
+      EXTRACTOR_TIER2_URL: http://extractor-llm:8000/run
+      CONCURRENCY: ${CONCURRENCY:-4}
+      MAX_ATTEMPTS: ${MAX_ATTEMPTS:-5}
+      BACKOFF_BASE_MS: ${BACKOFF_BASE_MS:-5000}
+      BACKOFF_CAP_MS: ${BACKOFF_CAP_MS:-300000}
+      BREAKER_THRESHOLD: ${BREAKER_THRESHOLD:-5}
+      BREAKER_COOLDOWN_MS: ${BREAKER_COOLDOWN_MS:-30000}
+      MAX_TIER2_PER_DAY: ${MAX_TIER2_PER_DAY:-0}
+    depends_on:
+      postgres: { condition: service_healthy }
+      extractor-deterministic: { condition: service_started }
+      extractor-llm: { condition: service_started }
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - documents:/data/documents
+
+  # Workers listen for the API's runner. One-off run without the runner:
+  #   docker compose run --rm extractor-llm <documentId>
+  extractor-deterministic:
+    build: { context: ., dockerfile: services/Dockerfile, args: { SERVICE: extractor-deterministic } }
+    command: ["serve"]
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:3000
+      HMAC_SECRET: ${HMAC_SECRET:?generate one, see .env.example}
+      COVERAGE_THRESHOLD: ${COVERAGE_THRESHOLD:-1.0}
+
+  extractor-llm:
+    build: { context: ., dockerfile: services/Dockerfile, args: { SERVICE: extractor-llm } }
+    command: ["serve"]
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:3000
+      HMAC_SECRET: ${HMAC_SECRET:?generate one, see .env.example}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      LLM_MODEL: ${LLM_MODEL:-claude-sonnet-5-5}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      MOCK_ANSWERS_DIR: /fixtures/expected
+
+volumes:
+  pgdata:
+  documents:

@@ -1,0 +1,27 @@
+{
+  "documentId": "clean-03",
+  "extractionTier": 1,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "verified",
+  "vendor": "Ridgeway Consulting",
+  "invoiceNumber": "RC-0042",
+  "issueDate": "2026-03-09",
+  "currency": "GBP",
+  "lineItems": [
+    {
+      "description": "Advisory day",
+      "quantity": 5,
+      "unitPrice": 80000,
+      "amount": 400000
+    }
+  ],
+  "total": 400000
+}

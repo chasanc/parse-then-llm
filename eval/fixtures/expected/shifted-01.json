@@ -1,0 +1,39 @@
+{
+  "documentId": "shifted-01",
+  "extractionTier": 1,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "verified",
+  "vendor": "Harbor & Pine Co",
+  "invoiceNumber": "HP-5510",
+  "issueDate": "2026-04-21",
+  "currency": "USD",
+  "lineItems": [
+    {
+      "description": "Oak plank",
+      "quantity": 12,
+      "unitPrice": 2400,
+      "amount": 28800
+    },
+    {
+      "description": "Pine beam",
+      "quantity": 3,
+      "unitPrice": 9800,
+      "amount": 29400
+    },
+    {
+      "description": "Delivery",
+      "quantity": 1,
+      "unitPrice": 4500,
+      "amount": 4500
+    }
+  ],
+  "total": 62700
+}

@@ -1,0 +1,17 @@
+[project]
+name = "extractor-deterministic"
+version = "0.1.0"
+description = "Tier 1: deterministic invoice parser (text layer only, no LLM)"
+requires-python = ">=3.11"
+dependencies = ["pymupdf", "requests"]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
+exclude-newer = "7 days"

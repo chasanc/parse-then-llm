@@ -1,0 +1,39 @@
+{
+  "documentId": "clean-01",
+  "extractionTier": 1,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "verified",
+  "vendor": "Northwind Supplies Ltd",
+  "invoiceNumber": "INV-2026-0001",
+  "issueDate": "2026-01-15",
+  "currency": "USD",
+  "lineItems": [
+    {
+      "description": "Widget A",
+      "quantity": 10,
+      "unitPrice": 1250,
+      "amount": 12500
+    },
+    {
+      "description": "Widget B",
+      "quantity": 4,
+      "unitPrice": 3099,
+      "amount": 12396
+    },
+    {
+      "description": "Shipping",
+      "quantity": 1,
+      "unitPrice": 1500,
+      "amount": 1500
+    }
+  ],
+  "total": 26396
+}

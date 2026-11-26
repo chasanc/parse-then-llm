@@ -1,0 +1,51 @@
+{
+  "documentId": "clean-02",
+  "extractionTier": 1,
+  "coverageScore": 1,
+  "fieldSources": {
+    "vendor": "pdf",
+    "invoiceNumber": "pdf",
+    "issueDate": "pdf",
+    "currency": "pdf",
+    "lineItems": "pdf",
+    "total": "pdf"
+  },
+  "status": "verified",
+  "vendor": "Bluebird Logistics GmbH",
+  "invoiceNumber": "BB-77213",
+  "issueDate": "2026-02-03",
+  "currency": "EUR",
+  "lineItems": [
+    {
+      "description": "Pallet transport",
+      "quantity": 2,
+      "unitPrice": 45000,
+      "amount": 90000
+    },
+    {
+      "description": "Fuel surcharge",
+      "quantity": 2,
+      "unitPrice": 3250,
+      "amount": 6500
+    },
+    {
+      "description": "Insurance",
+      "quantity": 1,
+      "unitPrice": 8900,
+      "amount": 8900
+    },
+    {
+      "description": "Customs fee",
+      "quantity": 1,
+      "unitPrice": 2500,
+      "amount": 2500
+    },
+    {
+      "description": "Handling",
+      "quantity": 3,
+      "unitPrice": 1200,
+      "amount": 3600
+    }
+  ],
+  "total": 111500
+}

@@ -1,0 +1,9 @@
+{
+  "name": "parse-then-llm",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "start": "npm start -w @parse-then-llm/api",
+    "test": "npm test --workspaces --if-present"
+  }
+}
